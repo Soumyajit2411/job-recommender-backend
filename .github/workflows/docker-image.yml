@@ -69,7 +69,3 @@ jobs:
 
       - name: Push Docker Image
         run: docker push your-dockerhub-username/job-recommender-backend
-
-      - name: Deploy to Server (Optional)
-        run: |
-          ssh user@your-server-ip "docker pull your-dockerhub-username/job-recommender-backend && docker stop job-api || true && docker run -d -p 5000:5000 --env-file .env --name job-api your-dockerhub-username/job-recommender-backend"
