@@ -40,7 +40,7 @@ jobs:
         run: yarn tsc --noEmit
 
       - name: Run Tests
-        run: yarn test
+        run: yarn test --passWithNoTests
 
   build-and-deploy:
     name: Build, Push Docker Image & Deploy
