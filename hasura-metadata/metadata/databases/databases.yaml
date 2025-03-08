@@ -1,0 +1,17 @@
+- name: default
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url:
+        from_env: HASURA_GRAPHQL_DATABASE_URL
+      pool_settings:
+        max_connections: 50
+        idle_timeout: 180
+        retries: 3
+  tables:
+    - table:
+        schema: public
+        name: resumes
+    - table:
+        schema: public
+        name: job_recommendations
