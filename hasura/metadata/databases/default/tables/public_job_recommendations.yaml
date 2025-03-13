@@ -8,6 +8,22 @@ object_relationships:
   - name: user
     using:
       foreign_key_constraint_on: user_id
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        user_id:
+          _eq: X-Hasura-User-Id
+      set:
+        created_by: X-Hasura-User-Id
+        user_id: X-Hasura-User-Id
+      columns:
+        - resume_id
+        - job_title
+        - company_name
+        - job_url
+        - recommendation_score
+        - status
 select_permissions:
   - role: user
     permission:
@@ -19,7 +35,30 @@ select_permissions:
         - company_name
         - job_url
         - recommendation_score
+        - status
         - created_at
+        - updated_at
+      filter:
+        _and:
+          - user_id:
+              _eq: X-Hasura-User-Id
+          - is_deleted:
+              _eq: false
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - status
+        - updated_at
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      check: null
+      set:
+        updated_by: X-Hasura-User-Id
+delete_permissions:
+  - role: user
+    permission:
       filter:
         user_id:
           _eq: X-Hasura-User-Id

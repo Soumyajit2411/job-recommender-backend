@@ -1,6 +1,21 @@
-actions: []
+actions:
+  - name: uploadResumeAndGetJobs
+    definition:
+      kind: synchronous
+      handler: http://your-backend-url/uploadResumeAndGetJobs
+      headers:
+        - name: Content-Type
+          value: application/json
+    permissions:
+      - role: user
+
 custom_types:
-  enums: []
+  objects:
+    - name: JobRecommendationResponse
+    - name: UserData
+    - name: ResumeData
+    - name: JobRecommendation
+
   input_objects: []
-  objects: []
+
   scalars: []

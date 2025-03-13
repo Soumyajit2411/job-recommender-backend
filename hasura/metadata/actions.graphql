@@ -1,0 +1,29 @@
+type Mutation {
+  uploadResumeAndGetJobs(resumeUrl: String!): JobRecommendationResponse
+}
+
+type JobRecommendationResponse {
+  user: UserData!
+}
+
+type UserData {
+  id: Int!
+  email: String!
+  fullName: String!
+  resume: ResumeData!
+}
+
+type ResumeData {
+  id: Int!
+  fileUrl: String!
+  uploadedAt: timestamptz!
+  jobMatches: [JobRecommendation!]!
+}
+
+type JobRecommendation {
+  jobId: String!
+  jobTitle: String!
+  company: String!
+  jobDescription: String!
+  matchScore: Float!
+}

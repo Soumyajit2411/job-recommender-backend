@@ -20,6 +20,8 @@ insert_permissions:
         user_id:
           _eq: X-Hasura-User-Id
       set:
+        created_by: X-Hasura-User-Id
+        updated_by: X-Hasura-User-Id
         user_id: X-Hasura-User-Id
       columns:
         - resume_url
@@ -31,6 +33,29 @@ select_permissions:
         - user_id
         - resume_url
         - uploaded_at
+        - status
+        - updated_at
+      filter:
+        _and:
+          - user_id:
+              _eq: X-Hasura-User-Id
+          - is_deleted:
+              _eq: false
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - resume_url
+        - status
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      check: null
+      set:
+        updated_by: X-Hasura-User-Id
+delete_permissions:
+  - role: user
+    permission:
       filter:
         user_id:
           _eq: X-Hasura-User-Id

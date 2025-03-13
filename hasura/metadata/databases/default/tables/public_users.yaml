@@ -24,6 +24,27 @@ select_permissions:
         - email
         - full_name
         - created_at
+        - updated_at
+      filter:
+        _and:
+          - id:
+              _eq: X-Hasura-User-Id
+          - is_deleted:
+              _eq: false
+update_permissions:
+  - role: user
+    permission:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      columns:
+        - full_name
+        - updated_at
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      set:
+        is_deleted: true
