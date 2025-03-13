@@ -1,0 +1,25 @@
+table:
+  name: job_recommendations
+  schema: public
+object_relationships:
+  - name: resume
+    using:
+      foreign_key_constraint_on: resume_id
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - resume_id
+        - user_id
+        - job_title
+        - company_name
+        - job_url
+        - recommendation_score
+        - created_at
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id

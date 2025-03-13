@@ -1,0 +1,29 @@
+table:
+  name: users
+  schema: public
+array_relationships:
+  - name: job_recommendations
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: job_recommendations
+          schema: public
+  - name: resumes
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: resumes
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - email
+        - full_name
+        - created_at
+      filter:
+        id:
+          _eq: X-Hasura-User-Id

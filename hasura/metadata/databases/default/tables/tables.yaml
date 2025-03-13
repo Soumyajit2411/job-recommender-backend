@@ -1,0 +1,3 @@
+- "!include public_job_recommendations.yaml"
+- "!include public_resumes.yaml"
+- "!include public_users.yaml"
